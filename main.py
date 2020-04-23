@@ -1,10 +1,5 @@
 #Python 3 Console Tic Tac Toe 2-player Game
 
-#TODO 
-#Player Registration
-#Game field drawing
-#Gameplay
-
 def print_field():
     print_row(row0)
     print_row(row1)
@@ -142,7 +137,6 @@ def start():
     
     print('Use numpad keys (1-9) to make a move.\n')
     
-    #for i in range(9):
     while check_win_line(row1, row2, row3, sign1, sign2) != True:
 
             if count % 2 == 0:
@@ -174,17 +168,11 @@ def start():
 
 print('Welcome to Tic Tac Toe! \n')
 
-player1 = 'player1'
-sign1 = 'x'
+player1 = input('Enter first player name: ')
+sign1 = input('Choose your sign - x or o: ')[0]
 
-player2 = 'player2'
-sign2 = 'o'
-
-#player1 = input('Enter first player name: ')
-#sign1 = input('Choose your sign - x or o: ')
-
-#player2 = input('Enter second player name: ')
-#sign2 = input('Choose your sign - x or o: ')
+player2 = input('Enter second player name: ')
+sign2 = input('Choose your sign - x or o: ')[0]
 
 while True:
     row0 = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
