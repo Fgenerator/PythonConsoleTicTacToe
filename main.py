@@ -33,6 +33,106 @@ def check_a_move(move):
             print('Cell is not empty!')
             return False
 
+def check_row(row, sign):
+    if row[2] == row[4] == row[6] == sign:
+        row[2] = '-'
+        row[4] = '-'
+        row[6] = '-'
+        print_field()
+
+        if sign == sign1:
+            print(player1, 'won!')
+        elif sign == sign2:
+            print(player2, 'won!')
+        return True
+    else:
+        return False
+
+def check_rows(row1, row2, row3, sign1, sign2):
+    if check_row(row1, sign1) == True:
+        return True
+    elif check_row(row1, sign2) == True:
+        return True
+    elif check_row(row2, sign1) == True:
+        return True
+    elif check_row(row2, sign2) == True:
+        return True
+    elif check_row(row3, sign1) == True:
+        return True
+    elif check_row(row3, sign2) == True:
+        return True
+    else:
+        return False
+
+def check_column(column, sign):
+    if row1[column * 2] == row2[column * 2] == row3[column * 2] == sign:
+        row1[column * 2] = '|'
+        row2[column * 2] = '|'
+        row3[column * 2] = '|'
+        print_field()
+
+        if sign == sign1:
+            print(player1, 'won!')
+        elif sign == sign2:
+            print(player2, 'won!')
+        return True
+    else:
+        return False
+
+def check_columns():
+    if check_column(1, sign1) == True:
+        return True
+    elif check_column(1, sign2) == True:
+        return True
+    elif check_column(2, sign1) == True:
+            return True
+    elif check_column(2, sign2) == True:
+            return True
+    elif check_column(3, sign1) == True:
+            return True
+    elif check_column(3, sign2) == True:
+            return True
+    else:
+        return False
+    
+def check_diagonals(sign):
+    if row1[2] == row2[4] == row3[6] == sign:
+        row1[2] = '\\'
+        row2[4] = '\\'
+        row3[6] = '\\'
+        print_field()
+
+        if sign == sign1:
+            print(player1, 'won!')
+        elif sign == sign2:
+            print(player2, 'won!')
+        return True
+    if row1[6] == row2[4] == row3[2] == sign:
+        row1[6] = '/'
+        row2[4] = '/'
+        row3[2] = '/'
+        print_field()
+
+        if sign == sign1:
+            print(player1, 'won!')
+        elif sign == sign2:
+            print(player2, 'won!')
+        return True
+    else:
+        return False
+
+
+def check_win_line(row1, row2, row3, sign1, sign2):
+    if check_rows(row1, row2, row3, sign1, sign2) == True:
+        return True
+    elif check_columns() == True:
+        return True
+    elif check_diagonals(sign1) == True:
+        return True
+    elif check_diagonals(sign2) == True:
+        return True
+    else:
+        return False
 
 def start():
     
@@ -42,7 +142,9 @@ def start():
     
     print('Use numpad keys (1-9) to make a move.\n')
     
-    for i in range(9):
+    #for i in range(9):
+    while check_win_line(row1, row2, row3, sign1, sign2) != True:
+
             if count % 2 == 0:
                 
                 while check == False:
@@ -67,6 +169,7 @@ def start():
                 player_move = 0
                 check = False
                 count += 1
+        
           
 
 print('Welcome to Tic Tac Toe! \n')
@@ -89,6 +192,7 @@ while True:
     row2 = [' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ']
     row3 = [' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ']
     row4 = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+
 
     input_to_cell = {
     '1': (row3, 2),
