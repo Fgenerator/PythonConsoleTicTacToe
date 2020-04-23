@@ -22,26 +22,17 @@ def make_a_move(move, sign):
     row[cell] = sign 
 
 def check_a_move(move):
-    row, cell = input_to_cell[move]
-    if row[cell] == ' ':
-        return True
-    else:
-        print('Cell is not empty!')
+    if move != '1' and move != '2' and move != '3' and move != '4' and move != '5' and move != '6' and move != '7' and move != '8' and move != '9':
+        print('Wrong move! Use 1-9 keys.')
         return False
+    else:
+        row, cell = input_to_cell[move]
+        if row[cell] == ' ':
+            return True
+        else:
+            print('Cell is not empty!')
+            return False
 
-def clear_field():
-    
-    global row0 
-    global row1 
-    global row2 
-    global row3 
-    global row4 
-
-    row0 = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
-    row1 = [' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ']
-    row2 = [' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ']
-    row3 = [' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ']
-    row4 = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
 
 def start():
     
@@ -76,12 +67,7 @@ def start():
                 player_move = 0
                 check = False
                 count += 1
-    f = input('Press Enter to start a New Game')
-    if f == '':
-        clear_field()
-        start()
-    else:
-        exit()        
+          
 
 print('Welcome to Tic Tac Toe! \n')
 
@@ -97,13 +83,14 @@ sign2 = 'o'
 #player2 = input('Enter second player name: ')
 #sign2 = input('Choose your sign - x or o: ')
 
-row0 = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
-row1 = [' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ']
-row2 = [' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ']
-row3 = [' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ']
-row4 = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+while True:
+    row0 = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+    row1 = [' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ']
+    row2 = [' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ']
+    row3 = [' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ']
+    row4 = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
 
-input_to_cell = {
+    input_to_cell = {
     '1': (row3, 2),
     '2': (row3, 4),
     '3': (row3, 6),
@@ -114,8 +101,9 @@ input_to_cell = {
     '8': (row1, 4),
     '9': (row1, 6),   
 }
-
-start()
-
-
-
+    start()
+    f = input('Start a New game? (y/n)')
+    if f == 'y':
+        print('')
+    else:
+        exit()  
