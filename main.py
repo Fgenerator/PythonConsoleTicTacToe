@@ -17,7 +17,7 @@ def make_a_move(move, sign):
     row[cell] = sign 
 
 def check_a_move(move):
-    if move != '1' and move != '2' and move != '3' and move != '4' and move != '5' and move != '6' and move != '7' and move != '8' and move != '9':
+    if move not in keys:
         print('Wrong move! Use 1-9 keys.')
         return False
     else:
@@ -44,17 +44,17 @@ def check_row(row, sign):
         return False
 
 def check_rows(row1, row2, row3, sign1, sign2):
-    if check_row(row1, sign1) == True:
+    if check_row(row1, sign1):
         return True
-    elif check_row(row1, sign2) == True:
+    elif check_row(row1, sign2):
         return True
-    elif check_row(row2, sign1) == True:
+    elif check_row(row2, sign1):
         return True
-    elif check_row(row2, sign2) == True:
+    elif check_row(row2, sign2):
         return True
-    elif check_row(row3, sign1) == True:
+    elif check_row(row3, sign1):
         return True
-    elif check_row(row3, sign2) == True:
+    elif check_row(row3, sign2):
         return True
     else:
         return False
@@ -75,17 +75,17 @@ def check_column(column, sign):
         return False
 
 def check_columns():
-    if check_column(1, sign1) == True:
+    if check_column(1, sign1):
         return True
-    elif check_column(1, sign2) == True:
+    elif check_column(1, sign2):
         return True
-    elif check_column(2, sign1) == True:
+    elif check_column(2, sign1):
             return True
-    elif check_column(2, sign2) == True:
+    elif check_column(2, sign2):
             return True
-    elif check_column(3, sign1) == True:
+    elif check_column(3, sign1):
             return True
-    elif check_column(3, sign2) == True:
+    elif check_column(3, sign2):
             return True
     else:
         return False
@@ -117,19 +117,19 @@ def check_diagonals(sign):
         return False
 
 def check_win_line(row1, row2, row3, sign1, sign2):
-    if check_rows(row1, row2, row3, sign1, sign2) == True:
+    if check_rows(row1, row2, row3, sign1, sign2):
         return True
-    elif check_columns() == True:
+    elif check_columns():
         return True
-    elif check_diagonals(sign1) == True:
+    elif check_diagonals(sign1):
         return True
-    elif check_diagonals(sign2) == True:
+    elif check_diagonals(sign2):
         return True
     else:
         return False
 
 def check_draw():
-    if row1[2] != ' ' and row1[4] != ' ' and row1[6] != ' ' and row2[2] != ' ' and row2[4] !=' ' and row2[6] != ' ' and row3[2] != ' ' and row3[4] != ' ' and row3[6] != ' ':
+    if row1[2] != row1[4] != ' ' and row1[6] != ' ' and row2[2] != ' ' and row2[4] !=' ' and row2[6] != ' ' and row3[2] != ' ' and row3[4] != ' ' and row3[6] != ' ':
         print('Draw!')
         return True
     else:
@@ -142,9 +142,9 @@ def start():
     check = False
     
     print('Use numpad keys (1-9) to make a move.\n')
-    while check_win_line(row1, row2, row3, sign1, sign2) == False and check_draw() != True:
+    while not check_win_line(row1, row2, row3, sign1, sign2) and not check_draw():
         if count % 2 == 0:
-            while check == False:
+            while not check:
                 print(player1, end='')
                 player_move = input(':')
                 check = check_a_move(player_move)
@@ -155,7 +155,7 @@ def start():
             check = False
             count += 1
         else:
-            while check == False:
+            while not check:
                 print(player2, end='')
                 player_move = input(':')
                 check = check_a_move(player_move)
@@ -174,13 +174,15 @@ def second_player_check():
 
 print('Welcome to Tic Tac Toe! \n')
 
+keys = ('1', '2', '3', '4', '5', '6', '7', '8', '9')
+
 player1 = input('Enter first player name: ')
 sign1 = input('Choose your sign - x or o: ')[0]
 
 player2 = input('Enter second player name: ')
 sign2 = input('Choose your sign - x or o: ')[0]
 
-while second_player_check() != True:
+while not second_player_check():
     if player2 == player1:
         print('Player 2 name coincides with Player 1 name.')
         player2 = input('Enter second player name: ')
