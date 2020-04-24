@@ -116,7 +116,6 @@ def check_diagonals(sign):
     else:
         return False
 
-
 def check_win_line(row1, row2, row3, sign1, sign2):
     if check_rows(row1, row2, row3, sign1, sign2) == True:
         return True
@@ -129,6 +128,13 @@ def check_win_line(row1, row2, row3, sign1, sign2):
     else:
         return False
 
+def check_draw():
+    if row1[2] != ' ' and row1[4] != ' ' and row1[6] != ' ' and row2[2] != ' ' and row2[4] !=' ' and row2[6] != ' ' and row3[2] != ' ' and row3[4] != ' ' and row3[6] != ' ':
+        print('Draw!')
+        return True
+    else:
+        return False
+
 def start():
     
     print_field()
@@ -136,35 +142,35 @@ def start():
     check = False
     
     print('Use numpad keys (1-9) to make a move.\n')
-    
-    while check_win_line(row1, row2, row3, sign1, sign2) != True:
-
-            if count % 2 == 0:
-                
-                while check == False:
-                    print(player1, end='')
-                    player_move = input(':')
-                    check = check_a_move(player_move)
+    while check_win_line(row1, row2, row3, sign1, sign2) == False and check_draw() != True:
+        if count % 2 == 0:
+            while check == False:
+                print(player1, end='')
+                player_move = input(':')
+                check = check_a_move(player_move)
                
-                make_a_move(player_move, sign1)
-                print_field()
-                player_move = 0
-                check = False
-                count += 1
-            else:
+            make_a_move(player_move, sign1)
+            print_field()
+            player_move = 0
+            check = False
+            count += 1
+        else:
+            while check == False:
+                print(player2, end='')
+                player_move = input(':')
+                check = check_a_move(player_move)
                 
-                while check == False:
-                    print(player2, end='')
-                    player_move = input(':')
-                    check = check_a_move(player_move)
-                
-                make_a_move(player_move, sign2)
-                print_field()
-                player_move = 0
-                check = False
-                count += 1
-        
-          
+            make_a_move(player_move, sign2)
+            print_field()
+            player_move = 0
+            check = False
+            count += 1
+
+def second_player_check():
+    if player2 != player1 and sign2 != sign1:
+        return True
+    else:
+        return False
 
 print('Welcome to Tic Tac Toe! \n')
 
@@ -174,13 +180,20 @@ sign1 = input('Choose your sign - x or o: ')[0]
 player2 = input('Enter second player name: ')
 sign2 = input('Choose your sign - x or o: ')[0]
 
+while second_player_check() != True:
+    if player2 == player1:
+        print('Player 2 name coincides with Player 1 name.')
+        player2 = input('Enter second player name: ')
+    elif sign2 == sign1:
+        print('Player 2 sign coincides with Player 1 sign.')
+        sign2 = input('Choose your sign - x or o: ')[0]
+
 while True:
     row0 = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
     row1 = [' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ']
     row2 = [' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ']
     row3 = [' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ']
     row4 = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
-
 
     input_to_cell = {
     '1': (row3, 2),
